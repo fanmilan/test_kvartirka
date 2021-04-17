@@ -1,8 +1,6 @@
-import './scss/index.scss';
+import './style.scss';
 
-import {Loader} from "../Loader/Loader";
-import {usePromiseTracker} from "react-promise-tracker";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 export function Page({children}) {
@@ -16,30 +14,43 @@ export function Page({children}) {
 
     function getFromStorage() {
         let cartInStorage = localStorage.getItem('cart');
-        return (cartInStorage) ? JSON.parse(cartInStorage) : [];
+        if (cartInStorage) {
+            try {
+                return JSON.parse(cartInStorage);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+        return [];
     }
 
     function changeCart(item) {
         let cartInStorage = [...cart];
 
         // check if item in cart
-        const indexInCart = cartInStorage.findIndex(value => value.name === item.name);
+        const indexInCart = cartInStorage.findIndex(value => value.id === item.id);
 
         if (indexInCart === -1) {
             //add
             cartInStorage.push(item);
         } else {
-            cartInStorage.splice(indexInCart, 1);
             //delete
-        }
+            cartInStorage.splice(indexInCart, 1);
 
+        }
         setCart(cartInStorage);
         localStorage.setItem('cart', JSON.stringify(cartInStorage));
+    }
+
+    function resetCart() {
+        setCart([]);
+        localStorage.setItem('cart', JSON.stringify([]));
+    }
+
+    function checkIsInCart() {
 
     }
 
-
-    const {promiseInProgress} = usePromiseTracker();
 
 
     return <div className='page'>
@@ -50,8 +61,9 @@ export function Page({children}) {
                     children(
                         {
                             fullcart: cart,
-                            cart: cart.map(value => value.name),
-                            changeCart
+                            cart: cart.map(value => value.id),
+                            changeCart,
+                            resetCart
                         }
                     )
                 }
@@ -66,7 +78,9 @@ function Header() {
     return <header className={'header'}>
         <div className="header__top">
             <div className="header__info">
-                <h1 className="header__title">ARMAGGEDON V</h1>
+                <h1 className="header__title">
+                    <Link to='/' className={'header__title-link'}>ARMAGGEDON V</Link>
+                </h1>
                 <div className='header__subtitle'>Сервис мониторинга и уничтожения астероидов, опасно подлетающих к
                     Земле.
                 </div>

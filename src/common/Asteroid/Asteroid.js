@@ -1,4 +1,4 @@
-import './Asteroid.scss';
+import './style.scss';
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -21,7 +21,7 @@ export function Asteroid({asteroid, distanceUnit, changeCart, isInCart}) {
     function renderDistance() {
         switch (distanceUnit?.name) {
             case 'lunar':
-                return asteroid.distanceMoon.toLocaleString('ru-RU') + ' дистанций до луны';
+                return asteroid.distanceLunar.toLocaleString('ru-RU') + ' дист. до луны';
                 break;
             default:
                 return asteroid.distanceKM.toLocaleString('ru-RU') + ' км';
@@ -29,10 +29,20 @@ export function Asteroid({asteroid, distanceUnit, changeCart, isInCart}) {
         }
     }
 
-    return <article className='asteroid' key={asteroid.id} id={asteroid.id}>
-        <div className="asteroid__image">
-            <div className="asteroid__dino"></div>
-            <div className="asteroid__asteroid" style={{backgroundSize : asteroid.size / 1.4, width : asteroid.size / 1.4, height : asteroid.size / 1.4}}></div>
+    function renderDate() {
+        return new Date(asteroid.unixtime).toLocaleString('ru', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).slice(0, -3)
+    }
+
+    return <article className={`asteroid ${asteroid.isDangerous ? 'asteroid_dangerous' : ''}`} key={asteroid.id} id={asteroid.id}>
+        <div className="asteroid__image-wrap">
+            <div className="asteroid__image asteroid__image_dino"></div>
+            <div className="asteroid__image asteroid__image_asteroid" style={{backgroundSize : asteroid.size / 1.4, width : asteroid.size / 1.4, height : asteroid.size / 1.4}}>
+
+            </div>
         </div>
         <div className="asteroid__body">
             <div className="asteroid__info">
@@ -40,7 +50,7 @@ export function Asteroid({asteroid, distanceUnit, changeCart, isInCart}) {
                 <div className="asteroid__attrs">
                     <dl className="attr attr_detail">
                         <dt className="attr__name">Дата</dt>
-                        <dd className="attr__value"><span>{asteroid.date}</span></dd>
+                        <dd className="attr__value"><span>{renderDate()}</span></dd>
                     </dl>
                     <dl className="attr attr_detail">
                         <dt className="attr__name">Расстояние</dt>
@@ -48,7 +58,7 @@ export function Asteroid({asteroid, distanceUnit, changeCart, isInCart}) {
                     </dl>
                     <dl className="attr attr_detail">
                         <dt className="attr__name">Размер</dt>
-                        <dd className="attr__value"><span>{asteroid.size} м</span></dd>
+                        <dd className="attr__value"><span>{asteroid.size.toLocaleString('ru-RU')} м</span></dd>
                     </dl>
                 </div>
             </div>
@@ -63,12 +73,12 @@ export function Asteroid({asteroid, distanceUnit, changeCart, isInCart}) {
     </article>;
 }
 
-export function Approach({approach}) {
-    return <article className={'approach'} key={approach.id}>
+export function Approach({approach, approach_index}) {
+    return <article className={'approach'} key={approach_index}>
         <div className={'approach__attrs'}>
-            <Attr name={'Скорость'} value={approach.velocity}/>
-            <Attr name={'Время'} value={approach.full_date}/>
-            <Attr name={'Расстояние'} value={approach.distance}/>
+            <Attr name={'Скорость'} value={approach.velocity.toLocaleString('ru-RU') +' км/ч'}/>
+            <Attr name={'Время'} value={approach.full_date.toLocaleDateString() + ' ' + approach.full_date.toLocaleTimeString()}/>
+            <Attr name={'Расстояние'} value={approach.distance.toLocaleString('ru-RU')  +' км'}/>
             <Attr name={'Орбита'} value={approach.orbiting_body}/>
         </div>
     </article>;
