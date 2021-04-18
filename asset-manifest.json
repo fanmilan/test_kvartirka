@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/test_kvartirka/static/css/main.c45ae299.chunk.css",
-    "main.js": "/test_kvartirka/static/js/main.6cbb14e3.chunk.js",
-    "main.js.map": "/test_kvartirka/static/js/main.6cbb14e3.chunk.js.map",
+    "main.js": "/test_kvartirka/static/js/main.d0505a3b.chunk.js",
+    "main.js.map": "/test_kvartirka/static/js/main.d0505a3b.chunk.js.map",
     "runtime-main.js": "/test_kvartirka/static/js/runtime-main.1989df3a.js",
     "runtime-main.js.map": "/test_kvartirka/static/js/runtime-main.1989df3a.js.map",
-    "static/js/2.16ef4752.chunk.js": "/test_kvartirka/static/js/2.16ef4752.chunk.js",
-    "static/js/2.16ef4752.chunk.js.map": "/test_kvartirka/static/js/2.16ef4752.chunk.js.map",
+    "static/js/2.f9b91311.chunk.js": "/test_kvartirka/static/js/2.f9b91311.chunk.js",
+    "static/js/2.f9b91311.chunk.js.map": "/test_kvartirka/static/js/2.f9b91311.chunk.js.map",
     "index.html": "/test_kvartirka/index.html",
     "static/css/main.c45ae299.chunk.css.map": "/test_kvartirka/static/css/main.c45ae299.chunk.css.map",
-    "static/js/2.16ef4752.chunk.js.LICENSE.txt": "/test_kvartirka/static/js/2.16ef4752.chunk.js.LICENSE.txt",
+    "static/js/2.f9b91311.chunk.js.LICENSE.txt": "/test_kvartirka/static/js/2.f9b91311.chunk.js.LICENSE.txt",
     "static/media/style.scss": "/test_kvartirka/static/media/dino.12554b49.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.1989df3a.js",
-    "static/js/2.16ef4752.chunk.js",
+    "static/js/2.f9b91311.chunk.js",
     "static/css/main.c45ae299.chunk.css",
-    "static/js/main.6cbb14e3.chunk.js"
+    "static/js/main.d0505a3b.chunk.js"
   ]
 }
