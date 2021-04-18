@@ -1,3 +1,5 @@
+@import './src/variables';
+
 .header{
   border-bottom:1px solid black;
   padding:37px 0 24px 0;
@@ -7,6 +9,10 @@
     display:flex;
     justify-content: space-between;
     align-items: baseline;
+  }
+
+  &__info{
+    width:400px;
   }
 
   &__title{
@@ -20,12 +26,11 @@
   }
 
   &__subtitle{
-    /*width:414px;*/
     font-size: 16px;
     line-height: 20px;
   }
 
-  @media screen and (max-width: 920px) {
+  @media screen and (max-width: $mobile-max-width) {
     padding:8px 0 18px 0;
     margin-bottom:10px;
 
@@ -38,6 +43,10 @@
     &__subtitle{
       width:100%;
       margin-bottom: 19px;
+    }
+
+    &__info{
+      width:100%;
     }
 
     &__top{

@@ -1,3 +1,6 @@
+@import './src/variables';
+
+
 .asteroid{
   width:100%;
   border: 1px solid #000000;
@@ -6,7 +9,8 @@
   background: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);
   position:relative;
   overflow:hidden;
-  padding-left:347px;
+  display:flex;
+  justify-content: space-between;
 
   &_dangerous{
     background: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
@@ -18,9 +22,10 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    width:100%;
     height:100%;
     padding:24px 24px 40px 0;
+    flex:0 1 573px;
+    min-width:495px;
   }
 
   &:first-of-type{
@@ -28,11 +33,10 @@
   }
 
   &__image-wrap{
-    width:316px;
-    position:absolute;
-    left:0;
-    top:0;
-    height:100%;
+    width:330px;
+    position:relative;
+    min-height:200px;
+    flex:0 1 330px;
   }
 
   &__image{
@@ -54,17 +58,13 @@
       background-position: 50% 100%;
       width:100%;
       height:100%;
-      bottom: 100px;
+      bottom: 90px;
       left: 50%;
-      -webkit-transform: translate(-50%);
       transform: translate(-50%);
     }
   }
 
-  &__info{
-    width:289px;
-    max-width:100%;
-  }
+
 
 
 
@@ -96,8 +96,15 @@
     font-weight:bold;
   }
 
+  &__info{
+    flex:0 0 289px;
+    max-width:100%;
+    z-index: 1;
+  }
+
   &__btn-wrap{
     text-align: center;
+    padding-left:24px;
   }
 
   &__btn{
@@ -116,15 +123,18 @@
 
 
 
-  @media screen and (max-width: 920px) {
+  @media screen and (max-width: $mobile-max-width) {
     $scale: 0.625;
     height:auto;
-    padding-top:145px;
     padding-left:0;
+    flex-direction: column;
+    display: block;
 
     &__image-wrap{
       height:145px;
+      min-height:145px;
       width:100%;
+      flex:none;
     }
 
     &__image{
@@ -144,25 +154,30 @@
         transform:  scale($scale)  translate(calc(-50%));
       }
     }
-    
+
     &__body{
       flex-direction: column;
       align-items: stretch;
-      padding: 0 16px 22px 16px;
+      padding: 0 16px 24px 16px;
       background:white;
+      flex:none;
+      min-width:auto;
     }
 
     &__info{
       margin-top:-40px;
       z-index:1;
+      flex:none;
+      margin-bottom:16px;
+    }
+
+    &__btn-wrap{
+      padding-left:0;
     }
 
     &__title{
       margin-bottom:24px;
     }
 
-    &__attrs{
-      margin-bottom:16px;
-    }
   }
 }

@@ -24,18 +24,18 @@ export function AsteroidPage() {
                     alert('Произошла ошибка при получении данных');
                 }
             });
-    }, []);
+    }, [asteroid_id]);
 
     return <Page key={'asteroid-page'}>
         {
             params => {
                 return (asteroid) ? <div className={'asteroid-content'}>
-                    <Asteroid asteroid={asteroid} changeCart={params.changeCart} isInCart={params.cart.includes(asteroid.id)} />
+                    <Asteroid asteroid={asteroid} changeCart={params.changeCart} isInCart={params.checkIsInCart(asteroid.id)} />
                     <section className='approaches'>
                         <h2 className="approached__title">Все сближения</h2>
                         <div className="approaches__content">
                             {
-                                asteroid.approach_data.map((approach, approach_index) => <Approach approach={approach} approach_index={approach_index}/>)
+                                asteroid.approach_data.map((approach, approach_index) => <Approach key={approach_index} approach={approach}/>)
                             }
                         </div>
                     </section>

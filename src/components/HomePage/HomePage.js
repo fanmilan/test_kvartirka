@@ -1,8 +1,8 @@
 import './HomePage.scss';
 
 import {Page} from "../../common/Page/Page";
-import {Asteroid} from "../../common/Asteroid/Asteroid";
-import {useEffect, useState} from "react";
+import {Asteroids} from "../../common/Asteroid/Asteroid";
+import {useState} from "react";
 import {getAsteroids} from "../../api/nasaAPI";
 import InfiniteScroll from "react-infinite-scroller";
 import {Loader} from "../../common/Loader/Loader";
@@ -13,6 +13,18 @@ export function HomePage() {
     const [isEndData, setEndData] = useState(false);
     const [asteroids, setAsteroids] = useState([]);
     const [isOnlyDangerous, setIsOnlyDangerous] = useState(false);
+    const [distanceUnits, setDistanceUnits] = useState([
+        {
+            'name': 'km',
+            'title': 'в километрах',
+            'active': true
+        },
+        {
+            'name': 'lunar',
+            'title': 'в дистанциях до луны',
+            'active': false
+        }
+    ]);
 
     function getData() {
         if (loading) return;
@@ -33,48 +45,8 @@ export function HomePage() {
         });
     }
 
-
     function handleChangeOnlyDangerous() {
         setIsOnlyDangerous(!isOnlyDangerous);
-    }
-
-    return <Page key={'home-page'}>
-        {
-            params => (
-                <Main asteroids={asteroids}
-                      getData={getData}
-                      isEndData={isEndData}
-                      handleChangeOnlyDangerous={handleChangeOnlyDangerous}
-                      isOnlyDangerous={isOnlyDangerous} {...params} />
-            )
-
-        }
-    </Page>
-}
-
-
-function Main({asteroids, handleChangeOnlyDangerous, isOnlyDangerous, cart, changeCart, getData, isEndData, loading}) {
-
-    const [distanceUnits, setDistanceUnits] = useState([
-        {
-            'name': 'km',
-            'title': 'в километрах',
-            'active': true
-        },
-        {
-            'name': 'lunar',
-            'title': 'в дистанциях до луны',
-            'active': false
-        }
-    ]);
-
-
-    function filterAsteroids() {
-        if (isOnlyDangerous) {
-            return asteroids.filter((item) => item.isDangerous);
-        } else {
-            return asteroids;
-        }
     }
 
     function handleChangeDistanceUnits(indexDistance) {
@@ -90,34 +62,43 @@ function Main({asteroids, handleChangeOnlyDangerous, isOnlyDangerous, cart, chan
         );
     }
 
+    function filterAsteroids() {
+        if (isOnlyDangerous) {
+            return asteroids.filter((item) => item.isDangerous);
+        } else {
+            return asteroids;
+        }
+    }
 
-    return <div className='home-content'>
-        <Settings handleChangeOnlyDangerous={handleChangeOnlyDangerous}
-                  distanceUnits={distanceUnits}
-                  handleChangeDistanceUnits={handleChangeDistanceUnits}/>
-        <InfiniteScroll
-            pageStart={0}
-            loadMore={getData}
-            hasMore={!loading && !isEndData}
-            loader={<Loader/>}
-        >
-            {
-                filterAsteroids().map(asteroid => <Asteroid key={asteroid.id}
-                                                            asteroid={asteroid}
-                                                            distanceUnit={distanceUnits.find(item => item.active)}
-                                                            isInCart={cart.includes(asteroid.id)}
-                                                            changeCart={changeCart}/>)
-            }
-        </InfiniteScroll>
-    </div>;
+    return <Page key={'home-page'}>
+        {
+            params => (
+                <div className='home-content'>
+                    <Settings handleChangeOnlyDangerous={handleChangeOnlyDangerous}
+                              distanceUnits={distanceUnits}
+                              handleChangeDistanceUnits={handleChangeDistanceUnits}/>
+                    <InfiniteScroll
+                        pageStart={0}
+                        loadMore={getData}
+                        hasMore={!isEndData}
+                        loader={<Loader/>}
+                    >
+                        <Asteroids asteroids={filterAsteroids()} params={params} distanceUnit={distanceUnits.find(item => item.active)}/>
+                    </InfiniteScroll>
+                </div>
+            )
+
+        }
+    </Page>
 }
+
 
 function Settings({handleChangeOnlyDangerous, distanceUnits, handleChangeDistanceUnits}) {
 
     function renderDistanceUnitLinks() {
         return distanceUnits.map((item, index) => {
             let linkActive = (item.active) ? 'link_active' : '';
-            return <span className={'settings__change-distance'}><a className={'link ' + linkActive}
+            return <span key={index} className={'settings__change-distance'}><a href='#' className={'link ' + linkActive}
                                                                     onClick={handleChangeDistanceUnits.bind(null, index)}>{item.title}</a></span>;
         });
     }

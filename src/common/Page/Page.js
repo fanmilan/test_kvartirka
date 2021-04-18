@@ -47,8 +47,8 @@ export function Page({children}) {
         localStorage.setItem('cart', JSON.stringify([]));
     }
 
-    function checkIsInCart() {
-
+    function checkIsInCart(asteroid_id) {
+        return (cart.findIndex((item) => item.id === asteroid_id) !== -1);
     }
 
 
@@ -60,8 +60,8 @@ export function Page({children}) {
                 {
                     children(
                         {
-                            fullcart: cart,
-                            cart: cart.map(value => value.id),
+                            cart,
+                            checkIsInCart,
                             changeCart,
                             resetCart
                         }

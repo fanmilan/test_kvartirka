@@ -1,8 +1,10 @@
+@import './src/variables';
+
 .footer{
   padding:46px 51px;
   text-align:center;
 
-  @media screen and (max-width: 920px) {
+  @media screen and (max-width: $mobile-max-width) {
     margin-top:8px;
     padding:24px 51px;
   }
