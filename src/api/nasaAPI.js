@@ -18,7 +18,7 @@ function getUrlByPage(page = 0) {
         end_date.setDate(start_date.getDate() + 1);
     }
 
-    return`http://www.neowsapp.com/rest/v1/feed?start_date=${start_date.toISOString().split('T')[0]}&end_date=${end_date.toISOString().split('T')[0]}&detailed=false&api_key=${TOKEN}`;
+    return`https://www.neowsapp.com/rest/v1/feed?start_date=${start_date.toISOString().split('T')[0]}&end_date=${end_date.toISOString().split('T')[0]}&detailed=false&api_key=${TOKEN}`;
 }
 
 export const getAsteroids = (page = 0) => {

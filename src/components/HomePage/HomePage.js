@@ -39,7 +39,8 @@ export function HomePage() {
                 }
             }).catch((error) => {
             console.log(error);
-            alert('Произошла ошибка получения данных');
+            //alert('Произошла ошибка получения данных');
+            setEndData(true);
         }).finally(() => {
             setLoading(false);
         });

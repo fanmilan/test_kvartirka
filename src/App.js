@@ -1,4 +1,5 @@
 import {HomePage} from "./components/HomePage/HomePage";
+//import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {DestroyPage} from "./components/DestroyPage/DestroyPage";
 import {AsteroidPage} from "./components/AsteroidPage/AsteroidPage";
