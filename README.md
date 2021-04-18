@@ -1,6 +1,7 @@
 # Тестовое задания для "Квартирка"
 
 DEMO : https://kvartirka.pishchulin.site/
+GitHub Demo: https://fanmilan.github.io/test_kvartirka/
 
 Нужно сверстать сайт «Армагеддон-V», сайт их трёх страниц про астероиды. На основе данных API NASA. https://api.nasa.gov Asteroids - NeoWs
 
